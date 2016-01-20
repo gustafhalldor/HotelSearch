@@ -1,0 +1,2 @@
+# HotelSearch
+Hotel search component
