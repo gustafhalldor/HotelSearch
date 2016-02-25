@@ -1,4 +1,4 @@
-package hotSearch;
+package trunk;
 
 public class Hotel {
 
@@ -68,4 +68,18 @@ public class Hotel {
 	public void setNrOfAvailableRooms(int nr) {
 		this.nrOfAvailableRooms = nr;
 	}
+	
+//	public Room [] getRoomAvailability(int startDate, int nrOfDays){
+//		
+//		boolean isFree = true;
+//		
+//		for(int i = 0; i < getNR_OF_ROOMS(); i++)
+//			
+//			for(int j = 1; i < 31; i++) {
+//				if(this.rooms[i].getAvailability(startDate, nrOfDays) == false)
+//					isFree = false;
+//			}
+//		
+//		return rooms[1];
+//	}
 }
