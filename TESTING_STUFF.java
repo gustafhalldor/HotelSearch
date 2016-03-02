@@ -2,9 +2,9 @@ package trunk;
 
 public class TESTING_STUFF {
 	public static void main(String[] sup) {
-		Hotel hot1 = new Hotel("Adam", "Reykjavik", "Skolavordustigur", 3);
-		Hotel hot2 = new Hotel("101", "Reykjavik", "Hverfisgata", 3);
-		Hotel hot3 = new Hotel("Centrum", "Reykjavik", "Adalstraeti", 3);
+		Hotel hot1 = new Hotel(1, "Adam", "Reykjavik", "Skolavordustigur", 3);
+		Hotel hot2 = new Hotel(2, "101", "Reykjavik", "Hverfisgata", 3);
+		Hotel hot3 = new Hotel(3, "Centrum", "Reykjavik", "Adalstraeti", 3);
 
 		
 		System.out.println(hot1.getNAME());

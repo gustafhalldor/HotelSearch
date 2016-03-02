@@ -2,6 +2,7 @@ package trunk;
 
 public class Hotel {
 
+	private int ID;
 	private String NAME;
 	private String LOCATION_CITY;
 	private String LOCATION_STREET;
@@ -9,7 +10,8 @@ public class Hotel {
 	private int nrOfAvailableRooms;
 	private Room [] rooms;
 
-	public Hotel(String name, String locCity, String locStreet, int nrOfRooms) {
+	public Hotel(int id, String name, String locCity, String locStreet, int nrOfRooms) {
+		this.setID(id);
 		this.setNAME(name);
 		this.setLOCATION_CITY(locCity);
 		this.setLOCATION_STREET(locStreet);
@@ -67,6 +69,14 @@ public class Hotel {
 
 	public void setNrOfAvailableRooms(int nr) {
 		this.nrOfAvailableRooms = nr;
+	}
+
+	public int getID() {
+		return this.ID;
+	}
+
+	public void setID(int iD) {
+		ID = iD;
 	}
 	
 //	public Room [] getRoomAvailability(int startDate, int nrOfDays){

@@ -2,6 +2,7 @@ package trunk;
 
 public class Room {
 	
+	private int hotelID;
 	private int ROOM_NUMBER;
 	private int TYPE = 2;			// Single = 1, Double = 2  .. spurning um að búa til aðra klasa sem erfa Room klasann, 
 									// semsagt t.d. búa til SingleRoom klasa og DoubleRoom klasa.. ?
@@ -60,4 +61,9 @@ public class Room {
 			availableDates[i] = value;
 		}
 	}
+
+	public int getHotelID() {
+		return hotelID;
+	}
+
 }
