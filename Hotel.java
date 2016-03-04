@@ -7,7 +7,7 @@ public class Hotel {
 	private String LOCATION_CITY;
 	private String LOCATION_STREET;
 	private int NR_OF_ROOMS;
-	private int nrOfAvailableRooms;
+	private Room [] availableRooms;
 	private Room [] rooms;
 
 	public Hotel(int id, String name, String locCity, String locStreet, int nrOfRooms) {
@@ -16,7 +16,7 @@ public class Hotel {
 		this.setLOCATION_CITY(locCity);
 		this.setLOCATION_STREET(locStreet);
 		this.setNR_OF_ROOMS(nrOfRooms);
-		this.setNrOfAvailableRooms(nrOfRooms);
+//		this.setNrOfAvailableRooms(nrOfRooms);
 		this.rooms = new Room[nrOfRooms];
 		createRooms();
 	}
@@ -63,13 +63,13 @@ public class Hotel {
 		NR_OF_ROOMS = nr;
 	}
 
-	public int getNrOfAvailableRooms() {
-		return nrOfAvailableRooms;
-	}
-
-	public void setNrOfAvailableRooms(int nr) {
-		this.nrOfAvailableRooms = nr;
-	}
+//	public int getNrOfAvailableRooms() {
+//		return nrOfAvailableRooms;
+//	}
+//
+//	public void setNrOfAvailableRooms(int nr) {
+//		this.nrOfAvailableRooms = nr;
+//	}
 
 	public int getID() {
 		return this.ID;
@@ -79,17 +79,37 @@ public class Hotel {
 		ID = iD;
 	}
 	
-//	public Room [] getRoomAvailability(int startDate, int nrOfDays){
-//		
-//		boolean isFree = true;
-//		
-//		for(int i = 0; i < getNR_OF_ROOMS(); i++)
-//			
-//			for(int j = 1; i < 31; i++) {
-//				if(this.rooms[i].getAvailability(startDate, nrOfDays) == false)
-//					isFree = false;
-//			}
-//		
-//		return rooms[1];
-//	}
+	public Room [] copyRooms() {
+		Room [] avlRooms = new Room[getNR_OF_ROOMS()];
+		avlRooms = this.rooms;
+		
+		return avlRooms;
+	}
+	
+	public Room [] getRoomAvailability(int startDate, int nrOfDays){
+		
+		Room [] availableRooms = this.copyRooms();
+		int index = 0;
+		
+		for(int i = 0; i < getNR_OF_ROOMS(); i++) {
+			
+			boolean isFree = true;
+		
+			for(int j = startDate; j < startDate + nrOfDays; j++) {
+				if(this.rooms[i].getAvailability(startDate, nrOfDays) == false)
+					isFree = false;
+			}
+			
+			// CHECK THIS SHIT OUT
+			// ALWAYS RETURNS SAME ROOM 3 TIMES IN A ROW
+			if(isFree)
+				rooms[i] = availableRooms[index++];
+		}
+		
+		return availableRooms;
+	}
+	
+	public Room [] getRooms() {
+		return this.rooms;
+	}
 }

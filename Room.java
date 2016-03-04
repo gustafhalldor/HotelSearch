@@ -53,6 +53,13 @@ public class Room {
 		
 		boolean isFree = true;
 		
+		for(int i = startDate; i < startDate+nrOfDays; i++) {
+			if(availableDates[i] == false) {
+				isFree = false;
+				break;
+			}
+		}
+		
 		return isFree;
 	}
 

@@ -12,5 +12,11 @@ public class TESTING_STUFF {
 		System.out.println(hot3.getNAME());
 		System.out.println(hot3.getLOCATION_CITY());
 		System.out.println(hot3.getLOCATION_STREET());
+		
+		Room [] test = hot1.getRooms();
+		test[0].setAvailableDates(1, 2, false);
+		
+		System.out.println(hot1.getRoomAvailability(1, 5));
+		
 	}
 }
