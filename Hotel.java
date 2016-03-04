@@ -7,7 +7,6 @@ public class Hotel {
 	private String LOCATION_CITY;
 	private String LOCATION_STREET;
 	private int NR_OF_ROOMS;
-	private Room [] availableRooms;
 	private Room [] rooms;
 
 	public Hotel(int id, String name, String locCity, String locStreet, int nrOfRooms) {
@@ -16,7 +15,6 @@ public class Hotel {
 		this.setLOCATION_CITY(locCity);
 		this.setLOCATION_STREET(locStreet);
 		this.setNR_OF_ROOMS(nrOfRooms);
-//		this.setNrOfAvailableRooms(nrOfRooms);
 		this.rooms = new Room[nrOfRooms];
 		createRooms();
 	}
@@ -63,14 +61,6 @@ public class Hotel {
 		NR_OF_ROOMS = nr;
 	}
 
-//	public int getNrOfAvailableRooms() {
-//		return nrOfAvailableRooms;
-//	}
-//
-//	public void setNrOfAvailableRooms(int nr) {
-//		this.nrOfAvailableRooms = nr;
-//	}
-
 	public int getID() {
 		return this.ID;
 	}
@@ -79,16 +69,13 @@ public class Hotel {
 		ID = iD;
 	}
 	
-	public Room [] copyRooms() {
-		Room [] avlRooms = new Room[getNR_OF_ROOMS()];
-		avlRooms = this.rooms;
-		
-		return avlRooms;
+	public Room [] getRooms() {
+		return this.rooms;
 	}
 	
 	public Room [] getRoomAvailability(int startDate, int nrOfDays){
 		
-		Room [] availableRooms = this.copyRooms();
+		Room [] availableRooms = new Room[getNR_OF_ROOMS()];
 		int index = 0;
 		
 		for(int i = 0; i < getNR_OF_ROOMS(); i++) {
@@ -100,16 +87,11 @@ public class Hotel {
 					isFree = false;
 			}
 			
-			// CHECK THIS SHIT OUT
-			// ALWAYS RETURNS SAME ROOM 3 TIMES IN A ROW
 			if(isFree)
-				rooms[i] = availableRooms[index++];
+				availableRooms[index++] = rooms[i];
 		}
 		
 		return availableRooms;
 	}
 	
-	public Room [] getRooms() {
-		return this.rooms;
-	}
 }

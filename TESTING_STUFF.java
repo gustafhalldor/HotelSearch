@@ -16,7 +16,7 @@ public class TESTING_STUFF {
 		Room [] test = hot1.getRooms();
 		test[0].setAvailableDates(1, 2, false);
 		
-		System.out.println(hot1.getRoomAvailability(1, 5));
+		System.out.println(hot1.getRoomAvailability(1, 5).length);
 		
 	}
 }
