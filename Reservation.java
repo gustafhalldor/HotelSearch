@@ -10,6 +10,7 @@ public class Reservation {
 	private String firstName;
 	private String lastName;
 	
+	// This constructor should probably just write this information straight to the DB
 	public Reservation(int id, String hotelname, int datein, int nrofnights, int nrofrooms, 
 			int nrofguests, String firstname, String lastname) {
 		this.setReservationID(id);
