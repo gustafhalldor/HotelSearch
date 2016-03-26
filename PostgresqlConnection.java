@@ -10,7 +10,7 @@ public class PostgresqlConnection {
 					"postgres", "gusti123");
 		}
 		catch(Exception e){
-			e.printStackTrace();
+			e.printStackTrace(); 
 		}
 	}
 }
