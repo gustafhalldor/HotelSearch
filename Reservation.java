@@ -2,90 +2,46 @@ package trunk;
 
 public class Reservation {
 	private int reservationID;
-	private String hotelName;
-	private int dateIn;
-	private int nrOfNights;
-	private int nrOfRooms;
-	private int nrOfGuests;
-	private String firstName;
-	private String lastName;
+	private int hotelId;
+	private int roomId;
+	private long checkIn;
+	private long checkOut;
+	private int guestId;
 	
-	// This constructor should probably just write this information straight to the DB
-	public Reservation(int id, String hotelname, int datein, int nrofnights, int nrofrooms, 
-			int nrofguests, String firstname, String lastname) {
+	
+	public Reservation(int id, int hotelid, int roomId, long checkin, long checkout, int guestid) {
 		this.setReservationID(id);
-		this.setHotelName(hotelname);
-		this.setDateIn(datein);
-		this.setNrOfNights(nrofnights);
-		this.setNrOfRooms(nrofrooms);
-		this.setNrOfGuests(nrofguests);
-		this.setFirstName(firstname);
-		this.setLastName(lastname);
+		this.setHotelId(hotelid);
+		this.setRoomId(roomId);
+		this.setCheckIn(checkin);
+		this.setCheckOut(checkout);
+//		this.setGuestId(guestid);
 	}
 
-	public int getNrOfRooms() {
-		return nrOfRooms;
+	public int getHotelId() {
+		return hotelId;
 	}
 
-	public void setNrOfRooms(int nrOfRooms) {
-		this.nrOfRooms = nrOfRooms;
-	}
-
-	public int getNrOfGuests() {
-		return nrOfGuests;
-	}
-
-	public void setNrOfGuests(int nrOfGuests) {
-		this.nrOfGuests = nrOfGuests;
-	}
-
-	public String getHotelName() {
-		return hotelName;
-	}
-
-	public void setHotelName(String hotelName) {
-		this.hotelName = hotelName;
-	}
-
-	public int getNrOfNights() {
-		return nrOfNights;
-	}
-
-	public void setNrOfNights(int nrOfNights) {
-		this.nrOfNights = nrOfNights;
-	}
-
-	public String getFirstName() {
-		return firstName;
-	}
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
+	public void setHotelId(int hotelid) {
+		this.hotelId = hotelid;
 	}
 	
-	public String getFullName() {
-		String first = this.getFirstName();
-		String last = this.getLastName();
-		
-		String full = first + " " + last;
-		
-		return full;
+	// Úfæra í DB query
+//	public String getFullName() {
+//		String first = this.getFirstName();
+//		String last = this.getLastName();
+//		
+//		String full = first + " " + last;
+//		
+//		return full;
+//	}
+
+	public long getCheckIn() {
+		return checkIn;
 	}
 
-	public int getDateIn() {
-		return dateIn;
-	}
-
-	public void setDateIn(int dateIn) {
-		this.dateIn = dateIn;
+	public void setCheckIn(long checkin) {
+		this.checkIn = checkin;
 	}
 
 	public int getReservationID() {
@@ -94,5 +50,29 @@ public class Reservation {
 
 	public void setReservationID(int reservationID) {
 		this.reservationID = reservationID;
+	}
+
+	public int getRoomId() {
+		return roomId;
+	}
+
+	public void setRoomId(int roomId) {
+		this.roomId = roomId;
+	}
+
+	public long getCheckOut() {
+		return checkOut;
+	}
+
+	public void setCheckOut(long checkOut) {
+		this.checkOut = checkOut;
+	}
+
+	public int getGuestId() {
+		return guestId;
+	}
+
+	public void setGuestId(int guestId) {
+		this.guestId = guestId;
 	}
 }

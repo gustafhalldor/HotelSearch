@@ -5,13 +5,14 @@ public class Guest {
 	private int GuestID;
 	private String firstName;
 	private String lastName;
-	private int reservationId;
+//	private int reservationId;
 	
-	public Guest(int GuestID, String firstName, String lastName, int reservationId) {
+//	public Guest(int GuestID, String firstName, String lastName, int reservationId) {
+	public Guest(int GuestID, String firstName, String lastName) {
 		this.setGuestID(GuestID);
 		this.setFirstName(firstName);
 		this.setLastName(lastName);
-		this.setReservationId(reservationId);
+//		this.setReservationId(reservationId);
 	}
 
 	public int getGuestID() {
@@ -38,12 +39,12 @@ public class Guest {
 		this.lastName = lastName;
 	}
 
-	public int getReservationId() {
-		return reservationId;
-	}
-
-	public void setReservationId(int reservationId) {
-		this.reservationId = reservationId;
-	}
+//	public int getReservationId() {
+//		return reservationId;
+//	}
+//
+//	public void setReservationId(int reservationId) {
+//		this.reservationId = reservationId;
+//	}
 }
 
