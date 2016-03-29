@@ -6,27 +6,28 @@ public class Hotel {
 	private String NAME;
 	private String LOCATION_CITY;
 	private String LOCATION_STREET;
-	private int NR_OF_ROOMS;
-	private Room [] rooms;
+//	private int NR_OF_ROOMS;
+//	private Room [] rooms;
 
-	public Hotel(int id, String name, String locCity, String locStreet, int nrOfRooms) {
+//	public Hotel(int id, String name, String locCity, String locStreet, int nrOfRooms) {
+	public Hotel(int id, String name, String locCity, String locStreet) {
 		this.setID(id);
 		this.setNAME(name);
 		this.setLOCATION_CITY(locCity);
 		this.setLOCATION_STREET(locStreet);
-		this.setNR_OF_ROOMS(nrOfRooms);
-		this.rooms = new Room[nrOfRooms];
-		createRooms();
+//		this.setNR_OF_ROOMS(nrOfRooms);
+//		this.rooms = new Room[nrOfRooms];
+//		createRooms();
 	}
 	
 	// Create rooms at the time of the Hotel object creation
 	// We number each room from 1 to NR_OF_ROOMS
 	public void createRooms() {
-		int k = this.getNR_OF_ROOMS();
-		
-		for(int i = 0; i < k; i++) {
-			rooms[i] = new Room(i+1);
-		}
+//		int k = this.getNR_OF_ROOMS();
+//		
+//		for(int i = 0; i < k; i++) {
+//			rooms[i] = new Room(i+1);
+//		}
 	}
 
 	public String getNAME() {
@@ -53,13 +54,13 @@ public class Hotel {
 		LOCATION_STREET = loc;
 	}
 
-	public int getNR_OF_ROOMS() {
-		return NR_OF_ROOMS;
-	}
-
-	public void setNR_OF_ROOMS(int nr) {
-		NR_OF_ROOMS = nr;
-	}
+//	public int getNR_OF_ROOMS() {
+//		return NR_OF_ROOMS;
+//	}
+//
+//	public void setNR_OF_ROOMS(int nr) {
+//		NR_OF_ROOMS = nr;
+//	}
 
 	public int getID() {
 		return this.ID;
@@ -69,29 +70,29 @@ public class Hotel {
 		ID = iD;
 	}
 	
-	public Room [] getRooms() {
-		return this.rooms;
-	}
+//	public Room [] getRooms() {
+//		return this.rooms;
+//	}
 	
-	public Room [] getRoomAvailability(int startDate, int nrOfDays){
-		
-		Room [] availableRooms = new Room[getNR_OF_ROOMS()];
-		int index = 0;
-		
-		for(int i = 0; i < getNR_OF_ROOMS(); i++) {
-			
-			boolean isFree = true;
-		
-			for(int j = startDate; j < startDate + nrOfDays; j++) {
-				if(this.rooms[i].getAvailability(startDate, nrOfDays) == false)
-					isFree = false;
-			}
-			
-			if(isFree)
-				availableRooms[index++] = rooms[i];
-		}
-		
-		return availableRooms;
-	}
+//	public Room [] getRoomAvailability(int startDate, int nrOfDays){
+//		
+//		Room [] availableRooms = new Room[getNR_OF_ROOMS()];
+//		int index = 0;
+//		
+//		for(int i = 0; i < getNR_OF_ROOMS(); i++) {
+//			
+//			boolean isFree = true;
+//		
+//			for(int j = startDate; j < startDate + nrOfDays; j++) {
+//				if(this.rooms[i].getAvailability(startDate, nrOfDays) == false)
+//					isFree = false;
+//			}
+//			
+//			if(isFree)
+//				availableRooms[index++] = rooms[i];
+//		}
+//		
+//		return availableRooms;
+//	}
 	
 }

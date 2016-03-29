@@ -19,41 +19,72 @@ public class Controller {
 	         System.out.print("ID: " + id);
 	         System.out.println(" Name: " + name);
 	    }
-	    
-	    setAvailability(2, 3, 3, 4);
-	    createReservation(1, 5, 20160328, 20160329, 1);
-	    createNewGuest("Gustaf", "Gustafsson");
+
+//	    getAvailability();
+	    getHotel(1);
+//	    setAvailability(2, 3, 3, 4);
+//	    createReservation(1, 5, 20160328, 20160329, 1);
+//	    createNewGuest("Gustaf", "Gustafsson");
 	}
 	
 
-	//GERA ÞETTA MEÐ DUMMY DRASLI, RETURN-A BARA RANDOM HERBERGJUM
+	// Returning random hardcoded data because it's just too complicated to fully program this method
 	
-//	public Room [] getAvailability(int startDate, int nrOfDays){
-//	
-//		Room[] availableRooms = null;
-//	
-//		stmt = conn.createStatement();
-//		String sql;
-//	    sql = "SELECT hotelID, name FROM hotels";
-//	    ResultSet rs = stmt.executeQuery(sql);
-//	    
-//	    while(rs.next()){
-//	         //Retrieve by column name
-//	         int id  = rs.getInt("hotelid");
-//	         String name = rs.getString("name");
-//
-//	         //Display values
-//	         System.out.print("ID: " + id);
-//	         System.out.println(" Name: " + name);
-//	    }
-//	    
-//	      rs.close();
-//	      stmt.close();
-//	      conn.close();
-//
-//	
-//		return availableRooms;
-//	}
+	public static Room [] getAvailability(){
+	
+	
+		int rand = (int) (Math.random()*5);
+		if (rand == 0){
+			Room[] availableRooms = new Room[3];
+
+			availableRooms[0] = new Room(1, 1, "Double", 90);
+			availableRooms[1] = new Room(5, 2, "Double", 100);
+			availableRooms[2] = new Room(9, 3, "Double", 110);
+			
+			return availableRooms;
+		}
+		
+		else if(rand == 1){
+			Room[] availableRooms = new Room[3];
+
+			availableRooms[0] = new Room(4, 2, "Double", 90);
+			availableRooms[1] = new Room(8, 3, "Double", 100);
+			availableRooms[2] = new Room(12, 4, "Double", 110);
+			
+			return availableRooms;
+		}
+		
+		else if (rand == 2){
+			Room[] availableRooms = new Room[3];
+
+			availableRooms[0] = new Room(7, 3, "Double", 90);
+			availableRooms[1] = new Room(11, 4, "Double", 100);
+			availableRooms[2] = new Room(15, 5, "Double", 110);
+			
+			return availableRooms;
+		}
+		
+		else if (rand == 3){
+			Room[] availableRooms = new Room[3];
+
+			availableRooms[0] = new Room(10, 4, "Double", 90);
+			availableRooms[1] = new Room(14, 5, "Double", 100);
+			availableRooms[2] = new Room(3, 1, "Double", 110);
+			
+			return availableRooms;
+		}
+		
+		else {
+			Room[] availableRooms = new Room[3];
+
+			availableRooms[0] = new Room(13, 5, "Double", 90);
+			availableRooms[1] = new Room(2, 1, "Double", 100);
+			availableRooms[2] = new Room(6, 2, "Double", 110);
+			
+			return availableRooms;
+		}
+
+	}
 	
 	// dates are of the format 20160327, which means year 2016, month 03 and day 27.
 	public static void setAvailability(int roomid, int guestid, long checkin, long checkout) throws SQLException{
@@ -116,5 +147,29 @@ public class Controller {
 		return newGuy;
 	}
 	
+	public static Hotel getHotel(int id) throws SQLException{
+		Connection conn = PostgresqlConnection.getConnection();
+		Statement stmt = conn.createStatement();
+		String sql = "select * from hotels where hotelid ="+id;
+		ResultSet rs = stmt.executeQuery(sql);
+		
+	    while(rs.next()){
+	         //Retrieve by column name
+	         int hotid  = rs.getInt("hotelid");
+	         String name = rs.getString("name");
+	         String locCity = rs.getString("location_city");
+	         String locStreet = rs.getString("location_street");
+
+	         //Display values
+	         System.out.print("ID: " + hotid);
+	         System.out.println(" Name: " + name);
+	         System.out.println(" loccity: " + locCity);
+	         System.out.println(" locstreet: " + locStreet);
+	         Hotel hotel = new Hotel(hotid, name, locCity, locStreet);
+	         return hotel;
+	    }
+		return null;	    
+	    
+	}
 		
 }
