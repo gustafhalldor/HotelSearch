@@ -87,16 +87,21 @@ public class Controller {
 	}
 	
 	// dates are of the format 20160327, which means year 2016, month 03 and day 27.
-	public static void setAvailability(int roomid, int guestid, long checkin, long checkout) throws SQLException{
-		Connection conn = PostgresqlConnection.getConnection();
+	public static int setAvailability(int roomid, int guestid, long checkin, long checkout) throws SQLException{
+		/*Connection conn = PostgresqlConnection.getConnection();
 		Statement stmt = conn.createStatement();
 		String sql = "insert into occupied_room values("+roomid+","+guestid+","+checkin+","+checkout+")";
 		stmt.execute(sql);
-		stmt.close();
+		stmt.close();*/
+		
+		//skilum bara random tölu
+		int bokunarNR = (int)(Math.random()*100);
+		return bokunarNR;
 	
 	}
 	
 	// Returns instance of the newly created reservation
+	// mock objectið fyrir þetta verður fyrir db
 	public static Reservation createReservation(int hotelid, int roomid, long checkin, long checkout, int guestid) throws SQLException {
 		Connection conn = PostgresqlConnection.getConnection();
 		Statement stmt = conn.createStatement();
