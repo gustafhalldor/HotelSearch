@@ -20,8 +20,9 @@ public class Controller {
 	         System.out.println(" Name: " + name);
 	    }
 
+	    isOccupied(20160331, 20160405, 20160405, 20160406);
 //	    getAvailability();
-	    getHotel(1);
+//		getHotel(1);
 //	    setAvailability(2, 3, 3, 4);
 //	    createReservation(1, 5, 20160328, 20160329, 1);
 //	    createNewGuest("Gustaf", "Gustafsson");
@@ -29,6 +30,14 @@ public class Controller {
 	
 
 	// Returning random hardcoded data because it's just too complicated to fully program this method
+	
+	// Hinsvegar... ein pæling:
+	// Ef við notum long/int fyrir dagsetningar þá væri hægt að skoða occupied_rooms töfluna og sjá hvort að checkin/checkout
+	// tölurnar sem við fáum inní fallið séu einhversstaðar á milli checkin/checkout talnanna fyrir hvert herbergi í 
+	// occupied_room töflunni. Ef svo, þá er herbergið ekki laust.
+	// Dæmi: herbergi er á leigu frá 20160331 til 20160405 og það er í töflunni. Við fáum inn getAvailability(20160403, 20160408)
+	// Þá er checkin dagsetningin *****403 vissulega á milli *****331 og *****401 og herbergið þá ekki í hópi þeirra sem eru laus.
+	// Þetta er ekkert spes lausn, en virkar fyrir svona lítið prógramm eins og við erum með. Ef herbergin væru fleiri, þá væri þetta glatað.
 	
 	public static Room [] getAvailability(){
 	
@@ -95,6 +104,7 @@ public class Controller {
 		stmt.close();*/
 		
 		//skilum bara random tölu
+		// Gústaf edit: Skila breytu sem heitir bokunarNR úr setAvailability fallinu? hmmm... Ekki createReservation fallinu?
 		int bokunarNR = (int)(Math.random()*100);
 		return bokunarNR;
 	
@@ -175,6 +185,37 @@ public class Controller {
 	    }
 		return null;	    
 	    
+	}
+	
+	// See if checkin/checkout clashes with "start" and "end" (the dates to check against)
+	// 3 cases: checkin is before start and checkout is between start and end
+	//				checkin --- start <= checkout <= end
+	//
+	//			checkin is between start and end and checkout is after end
+	//				start <= checkin < end --- checkout
+	//
+	//			checkin is before start and checkout is after end
+	//				checkin --- start --- end --- checkout
+	//			
+	public static boolean isOccupied(long start, long end, long checkin, long checkout){
+		
+		if(start <= checkout && checkout <= end) {
+			System.out.println("TRUE");
+			return true;
+		}
+		
+		if(start <= checkin && checkin < end) {
+			System.out.println("TRUE");
+			return true;
+		} 
+			
+		if(checkin < start && checkout > end) {
+			System.out.println("TRUE");
+			return true;
+		}
+		
+		System.out.println("FALSE");
+		return false;
 	}
 		
 }
