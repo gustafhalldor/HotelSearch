@@ -4,24 +4,24 @@ import java.sql.*;
 public class Controller {
 	
 	public static void main(String[] args) throws SQLException{
-		Connection conn = PostgresqlConnection.getConnection();
-		Statement stmt = conn.createStatement();
-		String sql;
-	    sql = "SELECT hotelID, name FROM hotels";
-	    ResultSet rs = stmt.executeQuery(sql);
-	    
-	    while(rs.next()){
-	         //Retrieve by column name
-	         int id  = rs.getInt("hotelid");
-	         String name = rs.getString("name");
+//		Connection conn = PostgresqlConnection.getConnection();
+//		Statement stmt = conn.createStatement();
+//		String sql;
+//	    sql = "SELECT hotelID, name FROM hotels";
+//	    ResultSet rs = stmt.executeQuery(sql);
+//	    
+//	    while(rs.next()){
+//	         //Retrieve by column name
+//	         int id  = rs.getInt("hotelid");
+//	         String name = rs.getString("name");
+//
+//	         //Display values
+//	         System.out.print("ID: " + id);
+//	         System.out.println(" Name: " + name);
+//	    }
 
-	         //Display values
-	         System.out.print("ID: " + id);
-	         System.out.println(" Name: " + name);
-	    }
-
-	    isOccupied(20160331, 20160405, 20160405, 20160406);
-//	    getAvailability();
+//	    isOccupied(20160331, 20160405, 20160405, 20160406);
+	    getAvailability(20160405, 20160409, 2);
 //		getHotel(1);
 //	    setAvailability(2, 3, 3, 4);
 //	    createReservation(1, 5, 20160328, 20160329, 1);
@@ -39,14 +39,44 @@ public class Controller {
 	// Þá er checkin dagsetningin *****403 vissulega á milli *****331 og *****401 og herbergið þá ekki í hópi þeirra sem eru laus.
 	// Þetta er ekkert spes lausn, en virkar fyrir svona lítið prógramm eins og við erum með. Ef herbergin væru fleiri, þá væri þetta glatað.
 	
+	// Skilar fyrstu herbergjunum sem eru laus, án tillits til staðsetningar eða verðs.
+	
 //	public static Room [] getAvailability(long checkIn, long checkOut, int nrOfRooms){
 	
-	public boolean getAvailability(long checkIn, long checkOut, int nrOfRooms){
-		ControllerMockTrue mocker = new ControllerMockTrue();
-		return mocker.getAvailability(checkIn, checkOut, nrOfRooms);
+	public static Room[] getAvailability(int checkIn, int checkOut, int nrOfRooms) throws SQLException{
+//		ControllerMockTrue mocker = new ControllerMockTrue();
+//		return mocker.getAvailability(checkIn, checkOut, nrOfRooms);
 
+		Room[] avlRooms = new Room[nrOfRooms];
 		
+		Connection conn = PostgresqlConnection.getConnection();
+		Statement stmt = conn.createStatement();
+		String sql;	
 	
+	    sql = "select distinct rooms.roomid "
+	    		+ "from rooms, occupied_room "
+	    		+ "where rooms.roomid = occupied_room.roomid "
+	    		+ "and ((check_in <= "+checkOut+" and "+checkOut+" <= check_out) "
+	    		+ "or (check_in <= "+checkIn+" and "+checkIn+" < check_out) "
+	    		+ "or ("+checkIn+" < check_in and "+checkOut+" > check_out))";		
+	    
+	    String sql2 = "SELECT * FROM rooms, ("+sql+") AS sup WHERE sup.roomid != rooms.roomid";
+	    
+	    ResultSet rs = stmt.executeQuery(sql2);		//Hérna eru öll herbergi sem eru laus þennar dagsetningar
+	    
+	    int i = 0;
+	    
+	    while(rs.next()){
+	    	avlRooms[i] = new Room(rs.getInt("roomid"), rs.getInt("hotelid"), "Double", rs.getDouble("price"));
+	    	i++;
+	    	if (i == nrOfRooms) return avlRooms;
+	    }
+	   
+	    System.out.println("komst í gegn");
+	    return null;	// if I got through the code directly above then it means no rooms were available, or there
+	    				// weren't enough rooms available
+	    
+	    		
 	
 //		int rand = (int) (Math.random()*5);
 //		if (rand == 0){
