@@ -103,6 +103,10 @@ public class Controller {
 	
 	// dates are of the format 20160327, which means year 2016, month 03 and day 27.
 	public int setAvailability(int roomid, int guestid, long checkin, long checkout) throws SQLException{
+		int bokunarNR = (int)(Math.random()*100);
+		return bokunarNR;
+		
+		
 		/*Connection conn = PostgresqlConnection.getConnection();
 		Statement stmt = conn.createStatement();
 		String sql = "insert into occupied_room values("+roomid+","+guestid+","+checkin+","+checkout+")";
@@ -111,8 +115,7 @@ public class Controller {
 		
 		//skilum bara random tölu
 		// Gústaf edit: Skila breytu sem heitir bokunarNR úr setAvailability fallinu? hmmm... Ekki createReservation fallinu?
-		int bokunarNR = (int)(Math.random()*100);
-		return bokunarNR;
+		
 	
 	}
 	
