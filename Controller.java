@@ -21,7 +21,7 @@ public class Controller {
 //	    }
 
 //	    isOccupied(20160331, 20160405, 20160405, 20160406);
-	    getAvailability(20160405, 20160409, 2);
+//	    getAvailability(20160405, 20160409, 15);
 //		getHotel(1);
 //	    setAvailability(2, 3, 3, 4);
 //	    createReservation(1, 5, 20160328, 20160329, 1);
@@ -44,15 +44,13 @@ public class Controller {
 //	public static Room [] getAvailability(long checkIn, long checkOut, int nrOfRooms){
 	
 	public static Room[] getAvailability(int checkIn, int checkOut, int nrOfRooms) throws SQLException{
-//		ControllerMockTrue mocker = new ControllerMockTrue();
-//		return mocker.getAvailability(checkIn, checkOut, nrOfRooms);
 
 		Room[] avlRooms = new Room[nrOfRooms];
 		
 		Connection conn = PostgresqlConnection.getConnection();
 		Statement stmt = conn.createStatement();
-		String sql;	
-	
+		String sql;
+		
 	    sql = "select distinct rooms.roomid "
 	    		+ "from rooms, occupied_room "
 	    		+ "where rooms.roomid = occupied_room.roomid "
@@ -62,7 +60,7 @@ public class Controller {
 	    
 	    String sql2 = "SELECT * FROM rooms, ("+sql+") AS sup WHERE sup.roomid != rooms.roomid";
 	    
-	    ResultSet rs = stmt.executeQuery(sql2);		//Hérna eru öll herbergi sem eru laus þennar dagsetningar
+	    ResultSet rs = stmt.executeQuery(sql2);		//Hérna eru öll herbergi sem eru laus þessar dagsetningar
 	    
 	    int i = 0;
 	    
