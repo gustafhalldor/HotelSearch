@@ -7,27 +7,27 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-public class ControllerTestGetAvailability {
+public class ControllerTestGetAvailabilityRoomTooHigh {
 	int dateIn;
 	int dateOut;
 	int nrOfRooms;
 	Controller cont = new Controller();
 	
 	@Before
-	public void setUp1() throws Exception {
-		nrOfRooms = 2;
-		dateIn = 20160402;
-		dateOut = 20160406;
+	public void setUp() {
+		nrOfRooms = 16;
+		dateIn = 20160405;
+		dateOut = 20160411;
 	}
 	@Test
 	public void testGetAvailability() throws SQLException {
-		Room[] rooms = Controller.getAvailability(dateIn, dateOut, nrOfRooms);
+		Room[] rooms = cont.getAvailability(dateIn, dateOut, nrOfRooms);
 		
-		assertNotNull(rooms);
+		assertNull(rooms);
 	}
 	@After
-	public void tearDown1() throws Exception {
-		nrOfRooms = 2;
+	public void tearDown() {
+		nrOfRooms = 0;
 		dateIn = 0;
 		dateOut = 0;
 	}

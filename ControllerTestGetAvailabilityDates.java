@@ -8,7 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-public class ControllerTestGetAvailability3 {
+public class ControllerTestGetAvailabilityDates {
 	int dateIn;
 	int dateOut;
 	int nrOfRooms;
@@ -16,18 +16,19 @@ public class ControllerTestGetAvailability3 {
 	ExpectedException exception = ExpectedException.none(); 
 	
 	@Before
-	public void setUp1() throws Exception {
-		nrOfRooms = 0;
-		dateIn = 20160402;
-		dateOut = 20160406;
+	public void setUp() {
+		nrOfRooms = 2;
+		dateIn = 20160405;
+		dateOut = 20160403;
 	}
 	@Test
 	public void testGetAvailability() throws SQLException {
-		Controller.getAvailability(dateIn, dateOut, nrOfRooms);
-		exception.expect(NullPointerException.class);
+		Room[] rooms = cont.getAvailability(dateIn, dateOut, nrOfRooms);
+		
+		assertNull(rooms);
 	}
 	@After
-	public void tearDown1() throws Exception {
+	public void tearDown() {
 		nrOfRooms = 2;
 		dateIn = 0;
 		dateOut = 0;
