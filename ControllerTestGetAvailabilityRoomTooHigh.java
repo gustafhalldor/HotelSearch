@@ -15,7 +15,7 @@ public class ControllerTestGetAvailabilityRoomTooHigh {
 	
 	@Before
 	public void setUp() {
-		nrOfRooms = 16;		// Nr of rooms is too high. There aren't that many rooms available.
+		nrOfRooms = 15;		// Nr of rooms is too high. There aren't that many rooms available.
 		dateIn = 20160405;
 		dateOut = 20160411;
 	}
@@ -31,5 +31,5 @@ public class ControllerTestGetAvailabilityRoomTooHigh {
 		dateIn = 0;
 		dateOut = 0;
 	}
-
 }
+

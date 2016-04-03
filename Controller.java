@@ -30,7 +30,7 @@ public class Controller {
 
 	public Room[] getAvailability(int checkIn, int checkOut, int nrOfRooms) throws SQLException{
 
-		if(checkOut <= checkIn) return null;
+		if(checkOut <= checkIn) return null;		// Bad if the checkOut date precedes checkIn date
 		
 		Room[] avlRooms = new Room[nrOfRooms];
 		
@@ -38,13 +38,14 @@ public class Controller {
 		Statement stmt = conn.createStatement();
 		String sql;
 		
-	    sql = "select distinct rooms.roomid "
-	    		+ "from rooms, occupied_room "
-	    		+ "where rooms.roomid = occupied_room.roomid "
-	    		+ "and ((check_in <= "+checkOut+" and "+checkOut+" <= check_out) "
-	    		+ "or (check_in <= "+checkIn+" and "+checkIn+" < check_out) "
-	    		+ "or ("+checkIn+" < check_in and "+checkOut+" > check_out))";		
+		// Pt.1 of Finding the rooms available on the requested dates
+	    sql = "SELECT roomid "
+	    		+ "FROM occupied_room "
+	    		+ "WHERE ((check_in <= "+checkOut+" AND "+checkOut+" <= check_out) "
+	    		+ "OR (check_in <= "+checkIn+" AND "+checkIn+" < check_out) "
+	    		+ "OR ("+checkIn+" < check_in AND "+checkOut+" > check_out))";	
 	    
+	    // Pt.2 of Finding the rooms available on the requested dates
 	    String sql2 = "SELECT * FROM rooms GROUP BY roomid HAVING roomid NOT IN ("+sql+")";
 	   	    
 	    ResultSet rs = stmt.executeQuery(sql2);		// rs contains rooms that are available on the specified dates
@@ -56,8 +57,7 @@ public class Controller {
 	    	if (i == nrOfRooms) return avlRooms;
 	    }
 	    
-
-	    // Made it through the while loop which means there weren't enough rooms available to suit the request
+	    // Made it through the while loop which means there weren't enough rooms available to fulfill the request
 	    return null;
 	}
 	
