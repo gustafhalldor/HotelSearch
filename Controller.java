@@ -20,8 +20,7 @@ public class Controller {
 //	         System.out.println(" Name: " + name);
 //	    }
 
-//	    isOccupied(20160331, 20160405, 20160405, 20160406);
-//	    getAvailability(20160405, 20160411, 16);
+//	    getAvailability(20160404, 20160411, 16);
 //		getHotel(1);
 //	    setAvailability(2, 3, 3, 4);
 //	    createReservation(1, 5, 20160328, 20160329, 1);
@@ -29,9 +28,6 @@ public class Controller {
 	}
 	
 
-	// Limited functionality of this method as it doesn't work properly if there are 2 or more occupied rooms on the dates requested
-	// not skilled enough in sql to do that..
-	
 	public Room[] getAvailability(int checkIn, int checkOut, int nrOfRooms) throws SQLException{
 
 		if(checkOut <= checkIn) return null;
@@ -49,8 +45,8 @@ public class Controller {
 	    		+ "or (check_in <= "+checkIn+" and "+checkIn+" < check_out) "
 	    		+ "or ("+checkIn+" < check_in and "+checkOut+" > check_out))";		
 	    
-	    String sql2 = "SELECT * FROM rooms, ("+sql+") AS sup WHERE sup.roomid != rooms.roomid";
-	    
+	    String sql2 = "SELECT * FROM rooms GROUP BY roomid HAVING roomid NOT IN ("+sql+")";
+	   	    
 	    ResultSet rs = stmt.executeQuery(sql2);		// rs contains rooms that are available on the specified dates
 	    int i = 0; 
 	    
@@ -60,23 +56,9 @@ public class Controller {
 	    	if (i == nrOfRooms) return avlRooms;
 	    }
 	    
-	    sql = "SELECT * from rooms";
-	    ResultSet rsRooms = stmt.executeQuery(sql);
-	    
-	    
-	    if(i == 0)	// If nothing got added in the while loop above, then we add whichever rooms we want from the rooms table
-	    {
-		    while(rsRooms.next()){
-		    	avlRooms[i] = new Room(rsRooms.getInt("roomid"), rsRooms.getInt("hotelid"), "Double", rsRooms.getDouble("price"));
-		    	i++;
-		    	if (i == nrOfRooms) return avlRooms;
-		    }
-	    }
 
-	    System.out.println("komst í gegn");
-	    return null;	// if I got through the code directly above then it means no rooms were available, or there
-	    				// weren't enough rooms available
-	    
+	    // Made it through the while loop which means there weren't enough rooms available to suit the request
+	    return null;
 	}
 	
 	// dates are of the format 20160327, which means year 2016, month 03 and day 27.

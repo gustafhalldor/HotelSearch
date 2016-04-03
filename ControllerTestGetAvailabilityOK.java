@@ -15,7 +15,7 @@ public class ControllerTestGetAvailabilityOK {
 	
 	@Before
 	public void setUp(){
-		nrOfRooms = 2;
+		nrOfRooms = 2;		// Everything A-OK!
 		dateIn = 20160402;
 		dateOut = 20160406;
 	}

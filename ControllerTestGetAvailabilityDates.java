@@ -19,7 +19,7 @@ public class ControllerTestGetAvailabilityDates {
 	public void setUp() {
 		nrOfRooms = 2;
 		dateIn = 20160405;
-		dateOut = 20160403;
+		dateOut = 20160403;		// dateOut is before dateIn in time!
 	}
 	@Test
 	public void testGetAvailability() throws SQLException {
@@ -29,7 +29,7 @@ public class ControllerTestGetAvailabilityDates {
 	}
 	@After
 	public void tearDown() {
-		nrOfRooms = 2;
+		nrOfRooms = 0;
 		dateIn = 0;
 		dateOut = 0;
 	}
