@@ -10,8 +10,6 @@ public class Room {
 //	private int MAX_PERSONS = 2;	
 
 	
-//	private boolean [] availableDates;
-	
 	public Room(int roomid, int hotelid, String roomtype, double price) {
 		setRoomID(roomid);
 		setHotelID(hotelid);

@@ -4,18 +4,18 @@ public class Reservation {
 	private int reservationID;
 	private int hotelId;
 	private int roomId;
-	private long checkIn;
-	private long checkOut;
+	private int checkIn;
+	private int checkOut;
 	private int guestId;
 	
 	
-	public Reservation(int id, int hotelid, int roomId, long checkin, long checkout, int guestid) {
-		this.setReservationID(id);
+	public Reservation(int id, int hotelid, int roomId, int checkin, int checkout, int guestid) {
+		this.setReservationId(id);
 		this.setHotelId(hotelid);
 		this.setRoomId(roomId);
 		this.setCheckIn(checkin);
 		this.setCheckOut(checkout);
-//		this.setGuestId(guestid);
+		this.setGuestId(guestid);
 	}
 
 	public int getHotelId() {
@@ -25,30 +25,20 @@ public class Reservation {
 	public void setHotelId(int hotelid) {
 		this.hotelId = hotelid;
 	}
-	
-	// Úfæra í DB query
-//	public String getFullName() {
-//		String first = this.getFirstName();
-//		String last = this.getLastName();
-//		
-//		String full = first + " " + last;
-//		
-//		return full;
-//	}
 
-	public long getCheckIn() {
+	public int getCheckIn() {
 		return checkIn;
 	}
 
-	public void setCheckIn(long checkin) {
+	public void setCheckIn(int checkin) {
 		this.checkIn = checkin;
 	}
 
-	public int getReservationID() {
+	public int getReservationId() {
 		return reservationID;
 	}
 
-	public void setReservationID(int reservationID) {
+	public void setReservationId(int reservationID) {
 		this.reservationID = reservationID;
 	}
 
@@ -64,7 +54,7 @@ public class Reservation {
 		return checkOut;
 	}
 
-	public void setCheckOut(long checkOut) {
+	public void setCheckOut(int checkOut) {
 		this.checkOut = checkOut;
 	}
 
