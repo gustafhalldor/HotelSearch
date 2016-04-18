@@ -27,7 +27,6 @@ public class Controller {
 //	    createNewGuest("Gustaf", "Gustafsson");
 	}
 	
-
 	public Room[] getAvailability(int checkIn, int checkOut, int nrOfRooms) throws SQLException{
 
 		if(checkOut <= checkIn) return null;		// Bad if the checkOut date precedes checkIn date
@@ -60,6 +59,40 @@ public class Controller {
 	    // Made it through the while loop which means there weren't enough rooms available to fulfill the request
 	    return null;
 	}
+
+		// Below is the original function, before the changes on the 18th of April 2016
+//	public Room[] getAvailability(int checkIn, int checkOut, int nrOfRooms) throws SQLException{
+//
+//		if(checkOut <= checkIn) return null;		// Bad if the checkOut date precedes checkIn date
+//		
+//		Room[] avlRooms = new Room[nrOfRooms];
+//		
+//		Connection conn = PostgresqlConnection.getConnection();
+//		Statement stmt = conn.createStatement();
+//		String sql;
+//		
+//		// Pt.1 of Finding the rooms available on the requested dates
+//	    sql = "SELECT roomid "
+//	    		+ "FROM occupied_room "
+//	    		+ "WHERE ((check_in <= "+checkOut+" AND "+checkOut+" <= check_out) "
+//	    		+ "OR (check_in <= "+checkIn+" AND "+checkIn+" < check_out) "
+//	    		+ "OR ("+checkIn+" < check_in AND "+checkOut+" > check_out))";	
+//	    
+//	    // Pt.2 of Finding the rooms available on the requested dates
+//	    String sql2 = "SELECT * FROM rooms GROUP BY roomid HAVING roomid NOT IN ("+sql+")";
+//	   	    
+//	    ResultSet rs = stmt.executeQuery(sql2);		// rs contains rooms that are available on the specified dates
+//	    int i = 0; 
+//	    
+//	    while(rs.next()){
+//	    	avlRooms[i] = new Room(rs.getInt("roomid"), rs.getInt("hotelid"), "Double", rs.getDouble("price"));
+//	    	i++;
+//	    	if (i == nrOfRooms) return avlRooms;
+//	    }
+//	    
+//	    // Made it through the while loop which means there weren't enough rooms available to fulfill the request
+//	    return null;
+//	}
 	
 	// dates are of the format 20160327, which means year 2016, month 03 and day 27.
 	public void setAvailability(int roomid, int guestid, int checkin, int checkout) throws SQLException{
@@ -138,10 +171,10 @@ public class Controller {
 	         String locStreet = rs.getString("location_street");
 
 	         //Display values
-	         System.out.print("ID: " + hotid);
-	         System.out.println(" Name: " + name);
-	         System.out.println(" loccity: " + locCity);
-	         System.out.println(" locstreet: " + locStreet);
+//	         System.out.print("ID: " + hotid);
+//	         System.out.println(" Name: " + name);
+//	         System.out.println(" loccity: " + locCity);
+//	         System.out.println(" locstreet: " + locStreet);
 	         Hotel hotel = new Hotel(hotid, name, locCity, locStreet);
 	         return hotel;
 	    }
