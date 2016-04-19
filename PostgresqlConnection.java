@@ -7,7 +7,7 @@ public class PostgresqlConnection {
 		try {
 			Class.forName("org.postgresql.Driver");
 			Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/HotelSearch", 
-					"postgres", "gusti123");
+					"postgres", "Gusti123");
 //			if(conn!=null) System.out.println("Connected to DB");
 			
 			return conn;

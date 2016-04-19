@@ -110,10 +110,12 @@ public class Controller {
 			
 			JLabel hotelname = new JLabel(hot.getName());
 			JLabel hotelloc = new JLabel(hot.getLocationCity());
+			JLabel roomtype = new JLabel(rooms[i].getType());
 			JLabel roomprice = new JLabel(Double.toString(rooms[i].getPrice()));
 			
 			panel.add(hotelname);
 			panel.add(hotelloc);
+			panel.add(roomtype);
 			panel.add(roomprice);
 			
 			panels[i] = panel;
