@@ -1,5 +1,8 @@
 package trunk;
+import java.awt.*;
 import java.sql.*;
+
+import javax.swing.*;
 
 public class Controller {
 	
@@ -20,14 +23,14 @@ public class Controller {
 //	         System.out.println(" Name: " + name);
 //	    }
 
-//	    getAvailability(20160404, 20160411, 16);
+//	    getAvailability(20160404, 20160411, 2);
 //		getHotel(1);
 //	    setAvailability(2, 3, 3, 4);
 //	    createReservation(1, 5, 20160328, 20160329, 1);
 //	    createNewGuest("Gustaf", "Gustafsson");
 	}
 	
-	public Room[] getAvailability(int checkIn, int checkOut, int nrOfRooms) throws SQLException{
+	public JPanel[] getAvailability(int checkIn, int checkOut, int nrOfRooms) throws SQLException{
 
 		if(checkOut <= checkIn) return null;		// Bad if the checkOut date precedes checkIn date
 		
@@ -53,7 +56,7 @@ public class Controller {
 	    while(rs.next()){
 	    	avlRooms[i] = new Room(rs.getInt("roomid"), rs.getInt("hotelid"), "Double", rs.getDouble("price"));
 	    	i++;
-	    	if (i == nrOfRooms) return avlRooms;
+	    	if (i == nrOfRooms) return createPanels(avlRooms);
 	    }
 	    
 	    // Made it through the while loop which means there weren't enough rooms available to fulfill the request
@@ -94,6 +97,31 @@ public class Controller {
 //	    return null;
 //	}
 	
+	// Creating JPanels for each room asked for. Each JPanel contains 3 JLabel components, containing the hotel name, 
+	// the hotel location (city) and the price of the room
+	public JPanel [] createPanels(Room[] rooms) throws SQLException{
+		
+		JPanel[] panels = new JPanel[rooms.length];
+		
+		for(int i = 0; i < panels.length; i++){
+			JPanel panel = new JPanel(new FlowLayout());
+			Controller cont = new Controller();
+			Hotel hot = cont.getHotel(rooms[i].getHotelID());
+			
+			JLabel hotelname = new JLabel(hot.getName());
+			JLabel hotelloc = new JLabel(hot.getLocationCity());
+			JLabel roomprice = new JLabel(Double.toString(rooms[i].getPrice()));
+			
+			panel.add(hotelname);
+			panel.add(hotelloc);
+			panel.add(roomprice);
+			
+			panels[i] = panel;
+		}
+		
+		return panels;
+	}
+		
 	// dates are of the format 20160327, which means year 2016, month 03 and day 27.
 	public void setAvailability(int roomid, int guestid, int checkin, int checkout) throws SQLException{
 		
